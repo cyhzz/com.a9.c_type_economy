@@ -32,6 +32,19 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
 
     void Init()
     {
+        if (C_TypeEconomySystem.instance.m_StoreController == null)
+        {
+            if (C_TypeEconomySystem.instance.error_log)
+            {
+                Debug.LogError("c_TypeEconomySystem.m_StoreController is null");
+            }
+            else
+            {
+                Debug.Log("c_TypeEconomySystem.m_StoreController is null");
+            }
+            return;
+        }
+
         var product = C_TypeEconomySystem.instance.m_StoreController.products.WithID(id);
         if (product == null)
         {
