@@ -25,6 +25,7 @@ namespace Com.A9.C_TypeEconomy
         {
             if (c_TypeItems.Count == 0 || c_TypeItems == null)
             {
+                Debug.Log("No product yet");
                 return "NA";
             }
             var product = C_TypeEconomySystem.instance.m_StoreController.products.WithID(c_TypeItems[0].GetID());
