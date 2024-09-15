@@ -16,8 +16,9 @@ namespace Com.A9.C_TypeEconomy
         public IStoreController m_StoreController; // The Unity Purchasing system.
         List<IC_TypeItem> c_TypeItems = new List<IC_TypeItem>();
 
-        void Start()
+        protected override void Awake()
         {
+            base.Awake();
             c_TypeItems = GetComponentsInChildren<IC_TypeItem>().ToList();
             InitializePurchasing();
         }
@@ -25,6 +26,11 @@ namespace Com.A9.C_TypeEconomy
         public string GetRegion()
         {
             return GetRegionWithID(c_TypeItems[0].GetID());
+        }
+
+        public IC_TypeItem GetLocalItemWithID(string id)
+        {
+            return c_TypeItems.Find(item => item.GetID() == id);
         }
 
         public string GetRegionWithID(string id)
