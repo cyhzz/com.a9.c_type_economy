@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using Com.A9.Singleton;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
 using UnityEngine.UI;
@@ -14,9 +15,15 @@ namespace Com.A9.C_TypeEconomy
     public class C_TypeEconomySystem : Singleton<C_TypeEconomySystem>, IStoreListener
     {
         public IStoreController m_StoreController; // The Unity Purchasing system.
+        public IExtensionProvider m_StoreExtensionProvider; // The Unity Purchasing system.
         List<IC_TypeItem> c_TypeItems = new List<IC_TypeItem>();
         public bool error_log;
         public Action OnInitializedSucc;
+
+        public UnityEvent OnRestoreStart;
+        public UnityEvent OnRestoreSucc;
+        public UnityEvent OnRestoreFailed;
+        public UnityEvent OnRestoreEnd;
 
         protected override void Awake()
         {
@@ -28,6 +35,38 @@ namespace Com.A9.C_TypeEconomy
         public string GetRegion()
         {
             return GetRegionWithID(c_TypeItems[0].GetID());
+        }
+
+        public void RestorePurchases()
+        {
+            OnRestoreStart?.Invoke();
+            m_StoreExtensionProvider.GetExtension<IAppleExtensions>().RestoreTransactions(result =>
+            {
+                if (result)
+                {
+                    OnRestoreSucc?.Invoke();
+                    if (error_log)
+                    {
+                        Debug.LogError("Restore Transaction Success");
+                    }
+                    else
+                    {
+                        Debug.Log("Restore Transaction Success");
+                    }
+                }
+                else
+                {
+                    OnRestoreFailed?.Invoke();
+                    if (error_log)
+                    {
+                        Debug.LogError("Restore Transaction Failed");
+                    }
+                    else
+                    {
+                        Debug.Log("Restore Transaction Failed");
+                    }
+                }
+            });
         }
 
         public IC_TypeItem GetLocalItemWithID(string id)
@@ -72,6 +111,7 @@ namespace Com.A9.C_TypeEconomy
         {
             Debug.Log("In-App Purchasing successfully initialized");
             m_StoreController = controller;
+            m_StoreExtensionProvider = extensions;
             OnInitializedSucc?.Invoke();
         }
 
