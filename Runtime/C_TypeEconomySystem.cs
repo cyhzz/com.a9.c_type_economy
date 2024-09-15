@@ -15,6 +15,7 @@ namespace Com.A9.C_TypeEconomy
     {
         public IStoreController m_StoreController; // The Unity Purchasing system.
         List<IC_TypeItem> c_TypeItems = new List<IC_TypeItem>();
+        public bool error_log;
 
         protected override void Awake()
         {
