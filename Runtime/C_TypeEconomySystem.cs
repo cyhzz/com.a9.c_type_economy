@@ -16,6 +16,7 @@ namespace Com.A9.C_TypeEconomy
         public IStoreController m_StoreController; // The Unity Purchasing system.
         List<IC_TypeItem> c_TypeItems = new List<IC_TypeItem>();
         public bool error_log;
+        public Action OnInitializedSucc;
 
         protected override void Awake()
         {
@@ -71,6 +72,7 @@ namespace Com.A9.C_TypeEconomy
         {
             Debug.Log("In-App Purchasing successfully initialized");
             m_StoreController = controller;
+            OnInitializedSucc?.Invoke();
         }
 
         public void OnInitializeFailed(InitializationFailureReason error)

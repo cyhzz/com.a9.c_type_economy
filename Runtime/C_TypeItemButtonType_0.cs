@@ -17,6 +17,21 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
 
     void Start()
     {
+        Init();
+        C_TypeEconomySystem.instance.OnInitializedSucc += Init;
+    }
+
+    void OnDestroy()
+    {
+        if (C_TypeEconomySystem.instance == null)
+        {
+            return;
+        }
+        C_TypeEconomySystem.instance.OnInitializedSucc -= Init;
+    }
+
+    void Init()
+    {
         var product = C_TypeEconomySystem.instance.m_StoreController.products.WithID(id);
         if (product == null)
         {
@@ -29,6 +44,7 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
                 Debug.Log("Product is null and disable button");
             }
             button.interactable = false;
+            return;
         }
 
         var local = C_TypeEconomySystem.instance.GetLocalItemWithID(id);
@@ -44,6 +60,7 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
                 Debug.Log("Local is null and disable button");
             }
             button.interactable = false;
+            return;
         }
 
         if (product.hasReceipt && local.CanPurchase() == false)
