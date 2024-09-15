@@ -53,6 +53,7 @@ namespace Com.A9.C_TypeEconomy
                     {
                         Debug.Log("Restore Transaction Success");
                     }
+                    OnRestoreEnd?.Invoke();
                 }
                 else
                 {
@@ -65,6 +66,7 @@ namespace Com.A9.C_TypeEconomy
                     {
                         Debug.Log("Restore Transaction Failed");
                     }
+                    OnRestoreEnd?.Invoke();
                 }
             });
         }
