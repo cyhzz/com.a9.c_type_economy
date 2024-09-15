@@ -1,0 +1,17 @@
+{
+  "name": "com.a9.c_type_economy",
+  "version": "1.0.1",
+  "description": "C_TypeEcnonmy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cyhzz/com.a9.c_type_economy.git"
+  },
+  "author": "A9019",
+  "keywords": [
+    "git",
+    "editor"
+  ],
+  "displayName": "A9 C_TypeEconomy",
+  "unity": "2020.3"
+}
