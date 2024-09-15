@@ -21,22 +21,19 @@ namespace Com.A9.C_TypeEconomy
             InitializePurchasing();
         }
 
-        public string region;
-        void Update()
-        {
-            if (region != GetRegion())
-            {
-                region = GetRegion();
-            }
-        }
-
         public string GetRegion()
         {
             if (c_TypeItems.Count == 0 || c_TypeItems == null)
             {
                 return "NA";
             }
-            return C_TypeEconomySystem.instance.m_StoreController.products.WithID(c_TypeItems[0].GetID()).metadata.isoCurrencyCode;
+            var product = C_TypeEconomySystem.instance.m_StoreController.products.WithID(c_TypeItems[0].GetID());
+            if (product == null)
+            {
+                Debug.Log("Product in Region is null");
+                return "NA";
+            }
+            return product.metadata.isoCurrencyCode;
         }
 
         void InitializePurchasing()
