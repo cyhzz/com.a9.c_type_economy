@@ -14,11 +14,19 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
     string id;
     [SerializeField]
     UnityEvent OnCanPurchased;
+    [SerializeField]
+    UnityEvent OnCantPurchased;
 
     void Start()
     {
         Init();
         C_TypeEconomySystem.instance.OnInitializedSucc += Init;
+        C_TypeEconomySystem.instance.GetLocalItemWithID(id).OnPurchaseSucceed += DisablePurchase;
+    }
+
+    void DisablePurchase()
+    {
+        OnCanPurchased?.Invoke();
     }
 
     void OnDestroy()
@@ -28,6 +36,11 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
             return;
         }
         C_TypeEconomySystem.instance.OnInitializedSucc -= Init;
+        var ld = C_TypeEconomySystem.instance.GetLocalItemWithID(id);
+        if (ld != null)
+        {
+            ld.OnPurchaseSucceed -= DisablePurchase;
+        }
     }
 
     void Init()
