@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using Com.A9.C_TypeEconomy;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
 public class C_TypeItemButtonType_0 : MonoBehaviour
@@ -21,12 +22,16 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
     {
         Init();
         C_TypeEconomySystem.instance.OnInitializedSucc += Init;
-        C_TypeEconomySystem.instance.GetLocalItemWithID(id).OnPurchaseSucceed += DisablePurchase;
+        var ld = C_TypeEconomySystem.instance.GetLocalItemWithID(id);
+        if (ld.PurchaseType() == ProductType.NonConsumable)
+        {
+            ld.OnPurchaseSucceed += DisablePurchase;
+        }
     }
 
     void DisablePurchase()
     {
-        OnCanPurchased?.Invoke();
+        OnCantPurchased?.Invoke();
     }
 
     void OnDestroy()
@@ -39,7 +44,10 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
         var ld = C_TypeEconomySystem.instance.GetLocalItemWithID(id);
         if (ld != null)
         {
-            ld.OnPurchaseSucceed -= DisablePurchase;
+            if (ld.PurchaseType() == ProductType.NonConsumable)
+            {
+                ld.OnPurchaseSucceed -= DisablePurchase;
+            }
         }
     }
 
