@@ -75,6 +75,14 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
             }
             return;
         }
+        if (C_TypeEconomySystem.instance.error_log)
+        {
+            Debug.LogError("Product no receipt and enable button");
+        }
+        else
+        {
+            Debug.Log("Product no receipt and enable button");
+        }
 
         OnCanPurchased?.Invoke();
         button.onClick.AddListener(() =>
