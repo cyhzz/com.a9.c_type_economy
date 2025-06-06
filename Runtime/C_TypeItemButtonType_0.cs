@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using Com.A9.C_TypeEconomy;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Purchasing;
@@ -11,6 +12,10 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
 {
     [SerializeField]
     Button button;
+    [SerializeField]
+    TMP_Text price_tag;
+    [SerializeField]
+    bool show_price_with_spicifier = true;
     [SerializeField]
     string id;
     [SerializeField]
@@ -109,6 +114,7 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
             }
             return;
         }
+
         if (C_TypeEconomySystem.instance.error_log)
         {
             Debug.LogError("Product no receipt and enable button");
@@ -123,5 +129,17 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
         {
             local.TryPurshase();
         });
+
+        if (price_tag)
+        {
+            if (show_price_with_spicifier)
+            {
+                price_tag.text = product.metadata.localizedPriceString;
+            }
+            else
+            {
+                price_tag.text = product.metadata.localizedPrice.ToString();
+            }
+        }
     }
 }
