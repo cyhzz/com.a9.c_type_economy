@@ -132,13 +132,20 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
 
         if (price_tag)
         {
-            if (show_price_with_spicifier)
+            if (string.IsNullOrEmpty(product.metadata.localizedPriceString) || product.metadata.localizedPrice == 0)
             {
-                price_tag.text = product.metadata.localizedPriceString;
+
             }
             else
             {
-                price_tag.text = product.metadata.localizedPrice.ToString();
+                if (show_price_with_spicifier)
+                {
+                    price_tag.text = product.metadata.localizedPriceString;
+                }
+                else
+                {
+                    price_tag.text = product.metadata.localizedPrice.ToString();
+                }
             }
         }
     }
