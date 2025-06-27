@@ -15,6 +15,8 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
     [SerializeField]
     TMP_Text price_tag;
     [SerializeField]
+    bool fetch_remote_pricetag = true;
+    [SerializeField]
     bool show_price_with_spicifier = true;
     [SerializeField]
     string id;
@@ -130,7 +132,7 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
             local.TryPurshase();
         });
 
-        if (price_tag)
+        if (fetch_remote_pricetag && price_tag)
         {
             if (string.IsNullOrEmpty(product.metadata.localizedPriceString) || product.metadata.localizedPrice == 0)
             {
