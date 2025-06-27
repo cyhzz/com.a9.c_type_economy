@@ -24,6 +24,7 @@ namespace Com.A9.C_TypeEconomy
         public UnityEvent OnRestoreSucc;
         public UnityEvent OnRestoreFailed;
         public UnityEvent OnRestoreEnd;
+        public bool test_mode;
 
         protected override void Awake()
         {
@@ -106,6 +107,11 @@ namespace Com.A9.C_TypeEconomy
 
         public void BuyProduct(string pruductid)
         {
+            if (test_mode)
+            {
+                c_TypeItems.Find(item => item.GetID() == pruductid).OnPurchaseSuccess();
+                return;
+            }
             m_StoreController.InitiatePurchase(m_StoreController.products.WithID(pruductid));
         }
 
