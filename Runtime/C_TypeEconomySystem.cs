@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using Com.A9.DataConsistancy;
 using Com.A9.Singleton;
 using UnityEditor;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace Com.A9.C_TypeEconomy
     public class C_TypeEconomySystem : Singleton<C_TypeEconomySystem>, IStoreListener
     {
         public IStoreController m_StoreController; // The Unity Purchasing system.
+        //productid,OnSucc,OnFailed
+        public Action<string, Action, Action> mock_store_controller;
         public IExtensionProvider m_StoreExtensionProvider; // The Unity Purchasing system.
         List<IC_TypeItem> c_TypeItems = new List<IC_TypeItem>();
         public bool error_log;
@@ -112,7 +115,15 @@ namespace Com.A9.C_TypeEconomy
 
         public void MockBuyProduct(string pruductid)
         {
-            c_TypeItems.Find(item => item.GetID() == pruductid).OnPurchaseSuccess();
+            mock_store_controller?.Invoke(pruductid,
+            () =>
+            {
+                c_TypeItems.Find(item => item.GetID() == pruductid).OnPurchaseSuccess();
+                if (c_TypeItems.Find(item => item.GetID() == pruductid).PurchaseType() == ProductType.NonConsumable)
+                {
+                    PlayerPrefsV2.SetInt(pruductid, 1);
+                }
+            }, null);
         }
 
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)

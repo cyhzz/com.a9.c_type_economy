@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+using Com.A9.DataConsistancy;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
@@ -36,7 +37,13 @@ namespace Com.A9.C_TypeEconomy
         public bool Purchased()
         {
             if (type == ProductType.NonConsumable)
+            {
+                if (C_TypeEconomySystem.instance.test_mode)
+                {
+                    return PlayerPrefsV2.GetInt(id, 0) == 1;
+                }
                 return C_TypeEconomySystem.instance.m_StoreController.products.WithID(id).hasReceipt;
+            }
             return false;
         }
 
