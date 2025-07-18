@@ -63,11 +63,14 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
         if (C_TypeEconomySystem.instance.test_mode)
         {
             var lc = C_TypeEconomySystem.instance.GetLocalItemWithID(id);
-            OnCanPurchased?.Invoke();
-            button.onClick.AddListener(() =>
+            if (lc.CanPurchase() == true)
             {
-                lc.TryPurshase();
-            });
+                OnCanPurchased?.Invoke();
+                button.onClick.AddListener(() =>
+                {
+                    lc.TryPurshase();
+                });
+            }
         }
 
         if (C_TypeEconomySystem.instance.m_StoreController == null)
