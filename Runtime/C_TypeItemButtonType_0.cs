@@ -71,6 +71,11 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
                     lc.TryPurshase();
                 });
             }
+            else
+            {
+                OnCantPurchased?.Invoke();
+            }
+            return;
         }
 
         if (C_TypeEconomySystem.instance.m_StoreController == null)
