@@ -107,12 +107,12 @@ namespace Com.A9.C_TypeEconomy
 
         public void BuyProduct(string pruductid)
         {
-            if (test_mode)
-            {
-                c_TypeItems.Find(item => item.GetID() == pruductid).OnPurchaseSuccess();
-                return;
-            }
             m_StoreController.InitiatePurchase(m_StoreController.products.WithID(pruductid));
+        }
+
+        public void MockBuyProduct(string pruductid)
+        {
+            c_TypeItems.Find(item => item.GetID() == pruductid).OnPurchaseSuccess();
         }
 
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)

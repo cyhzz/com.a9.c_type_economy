@@ -42,6 +42,11 @@ namespace Com.A9.C_TypeEconomy
 
         public void TryPurshase()
         {
+            if (C_TypeEconomySystem.instance.test_mode)
+            {
+                C_TypeEconomySystem.instance.MockBuyProduct(id);
+                return;
+            }
             C_TypeEconomySystem.instance.BuyProduct(id);
         }
 
