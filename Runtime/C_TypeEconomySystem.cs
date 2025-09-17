@@ -22,6 +22,7 @@ namespace Com.A9.C_TypeEconomy
         List<IC_TypeItem> c_TypeItems = new List<IC_TypeItem>();
         public bool error_log;
         public Action OnInitializedSucc;
+        public Action OnInitializedOver;
 
         public UnityEvent OnRestoreStart;
         public UnityEvent OnRestoreSucc;
@@ -132,6 +133,7 @@ namespace Com.A9.C_TypeEconomy
             m_StoreController = controller;
             m_StoreExtensionProvider = extensions;
             OnInitializedSucc?.Invoke();
+            OnInitializedOver?.Invoke();
         }
 
         public void OnInitializeFailed(InitializationFailureReason error)
@@ -147,6 +149,7 @@ namespace Com.A9.C_TypeEconomy
             {
                 errorMessage += $" More details: {message}";
             }
+            OnInitializedOver?.Invoke();
 
             Debug.Log(errorMessage);
         }
