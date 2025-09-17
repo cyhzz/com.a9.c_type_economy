@@ -135,11 +135,11 @@ namespace Com.A9.C_TypeEconomy
             Debug.Log("In-App Purchasing successfully initialized");
             m_StoreController = controller;
             m_StoreExtensionProvider = extensions;
+            region_tested = GetRegion();
+
             OnInitializedSucc?.Invoke();
             OnInitializedOver?.Invoke();
             AfterInitialize?.Invoke();
-
-            region_tested = GetRegion();
         }
 
         public void OnInitializeFailed(InitializationFailureReason error)
