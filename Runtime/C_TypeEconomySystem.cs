@@ -28,6 +28,7 @@ namespace Com.A9.C_TypeEconomy
         public UnityEvent OnRestoreSucc;
         public UnityEvent OnRestoreFailed;
         public UnityEvent OnRestoreEnd;
+        public UnityEvent AfterInitialize;
         public bool test_mode;
 
         protected override void Awake()
@@ -134,6 +135,7 @@ namespace Com.A9.C_TypeEconomy
             m_StoreExtensionProvider = extensions;
             OnInitializedSucc?.Invoke();
             OnInitializedOver?.Invoke();
+            AfterInitialize?.Invoke();
         }
 
         public void OnInitializeFailed(InitializationFailureReason error)
@@ -150,6 +152,7 @@ namespace Com.A9.C_TypeEconomy
                 errorMessage += $" More details: {message}";
             }
             OnInitializedOver?.Invoke();
+            AfterInitialize?.Invoke();
 
             Debug.Log(errorMessage);
         }
