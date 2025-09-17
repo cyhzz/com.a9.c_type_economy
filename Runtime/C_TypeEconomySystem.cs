@@ -30,6 +30,7 @@ namespace Com.A9.C_TypeEconomy
         public UnityEvent OnRestoreEnd;
         public UnityEvent AfterInitialize;
         public bool test_mode;
+        public bool initialize_finished;
 
         public string region_tested;
 
@@ -140,6 +141,7 @@ namespace Com.A9.C_TypeEconomy
             OnInitializedSucc?.Invoke();
             OnInitializedOver?.Invoke();
             AfterInitialize?.Invoke();
+            initialize_finished = true;
         }
 
         public void OnInitializeFailed(InitializationFailureReason error)
@@ -157,7 +159,7 @@ namespace Com.A9.C_TypeEconomy
             }
             OnInitializedOver?.Invoke();
             AfterInitialize?.Invoke();
-
+            initialize_finished = true;
             Debug.Log(errorMessage);
         }
 
