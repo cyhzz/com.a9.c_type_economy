@@ -31,6 +31,8 @@ namespace Com.A9.C_TypeEconomy
         public UnityEvent AfterInitialize;
         public bool test_mode;
 
+        public string region_tested;
+
         protected override void Awake()
         {
             base.Awake();
@@ -136,6 +138,8 @@ namespace Com.A9.C_TypeEconomy
             OnInitializedSucc?.Invoke();
             OnInitializedOver?.Invoke();
             AfterInitialize?.Invoke();
+
+            region_tested = GetRegion();
         }
 
         public void OnInitializeFailed(InitializationFailureReason error)
