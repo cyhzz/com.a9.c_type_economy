@@ -104,6 +104,7 @@ namespace Com.A9.C_TypeEconomy
 
         void InitializePurchasing()
         {
+            Debug.Log("InitializePurchasing---");
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
             c_TypeItems.ForEach(item =>
