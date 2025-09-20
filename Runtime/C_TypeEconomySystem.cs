@@ -101,6 +101,7 @@ namespace Com.A9.C_TypeEconomy
             return product.metadata.isoCurrencyCode;
         }
 
+
         void InitializePurchasing()
         {
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
@@ -115,6 +116,7 @@ namespace Com.A9.C_TypeEconomy
 
         public void BuyProduct(string pruductid)
         {
+            Debug.Log("Purchasing product asychronously: " + pruductid);
             m_StoreController.InitiatePurchase(m_StoreController.products.WithID(pruductid));
         }
 
