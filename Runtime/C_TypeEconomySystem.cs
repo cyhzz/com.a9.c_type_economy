@@ -34,12 +34,16 @@ namespace Com.A9.C_TypeEconomy
 
         public string region_tested;
 
-        protected override void Awake()
+        public void Init()
         {
-            base.Awake();
             c_TypeItems = GetComponentsInChildren<IC_TypeItem>().ToList();
             InitializePurchasing();
         }
+
+        // protected override void Awake()
+        // {
+        //     base.Awake();
+        // }
 
         public string GetRegion()
         {
