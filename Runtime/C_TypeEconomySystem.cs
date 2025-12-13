@@ -19,7 +19,7 @@ namespace Com.A9.C_TypeEconomy
         //productid,OnSucc,OnFailed
         public Action<string, Action, Action> mock_store_controller;
         public IExtensionProvider m_StoreExtensionProvider; // The Unity Purchasing system.
-        List<IC_TypeItem> c_TypeItems = new List<IC_TypeItem>();
+        public List<IC_TypeItem> c_TypeItems = new List<IC_TypeItem>();
         public bool error_log;
         public Action OnInitializedSucc;
         public Action OnInitializedOver;
@@ -38,6 +38,11 @@ namespace Com.A9.C_TypeEconomy
         {
             c_TypeItems = GetComponentsInChildren<IC_TypeItem>().ToList();
             InitializePurchasing();
+        }
+
+        public void FetchOnly()
+        {
+            c_TypeItems = GetComponentsInChildren<IC_TypeItem>().ToList();
         }
 
         // protected override void Awake()
