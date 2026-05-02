@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class C_TypeItemButtonType_0 : MonoBehaviour
 {
     [SerializeField]
-    Button button;
+    public Button button;
     [SerializeField]
     TMP_Text price_tag;
     [SerializeField]
@@ -19,7 +19,7 @@ public class C_TypeItemButtonType_0 : MonoBehaviour
     [SerializeField]
     bool show_price_with_spicifier = true;
     [SerializeField]
-    string id;
+    public string id;
     [SerializeField]
     UnityEvent OnCanPurchased;
     [SerializeField]
